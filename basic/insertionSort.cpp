@@ -20,7 +20,14 @@ int main(){
         print(arr, n);
 
         int i = 4;
-        for (int j = i; j > 0; --j) {
+
+        int k = i - 1;
+        while (k >= 0 && arr[k] > arr[i]) {
+            --k;
+        }
+        ++k;
+
+        for (int j = i; j > k; --j) {
             arr[j] = arr[j - 1];
             print(arr, n);
         }
