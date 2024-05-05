@@ -29,5 +29,5 @@ public:
 
 private:
     char* str_ = nullptr;
-    int size_ = 0
+    int size_ = 0;
 };
