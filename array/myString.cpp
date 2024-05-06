@@ -52,6 +52,10 @@ int myString::length() {
 }
 
 void myString::resize(int newSize) {
+    if (newSize == size_) {
+        return;
+    }
+
     char* newStr = nullptr;
 
     try {
@@ -64,6 +68,7 @@ void myString::resize(int newSize) {
     delete[] str_;
     str_ = newStr;
     size_ = newSize;
+    }
 }
 
 myString myString::substr(int begin, int num) {
