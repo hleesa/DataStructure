@@ -17,7 +17,7 @@ public:
 
     void resize(int newSize);
 
-    myString substr(int begin, int pos);
+    myString substr(int begin, int num);
 
     myString concat(myString appStr);
 
