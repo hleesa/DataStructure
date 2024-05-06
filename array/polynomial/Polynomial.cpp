@@ -19,34 +19,29 @@ Polynomial::Polynomial(int max_degree) // 편의상 기본값 사용
         coeffs_[i] = 0.0f;
 }
 
-Polynomial::Polynomial(const Polynomial& poly)
-{
+Polynomial::Polynomial(const Polynomial& poly) {
     capacity_ = poly.capacity_;
     coeffs_ = new float[capacity_];
     for (int i = 0; i < capacity_; i++)
         coeffs_[i] = poly.coeffs_[i];
 }
 
-Polynomial::~Polynomial()
-{
+Polynomial::~Polynomial() {
     if (coeffs_)
         delete[] coeffs_;
 }
 
-int Polynomial::maxDegree()
-{
+int Polynomial::maxDegree() {
     return this->capacity_ - 1;
 }
 
-void Polynomial::newTerm(const float coef, const int exp)
-{
+void Polynomial::newTerm(const float coef, const int exp) {
     assert(exp < capacity_);
 
     coeffs_[exp] = coef;
 }
 
-Polynomial Polynomial::add(const Polynomial& poly)
-{
+Polynomial Polynomial::add(const Polynomial& poly) {
     assert(poly.capacity_ == capacity_); // 문제를 단순화하기 위한 가정
 
     Polynomial temp(maxDegree());
@@ -58,18 +53,15 @@ Polynomial Polynomial::add(const Polynomial& poly)
     return temp;
 }
 
-Polynomial Polynomial::mult(const Polynomial& poly)
-{
+Polynomial Polynomial::mult(const Polynomial& poly) {
     assert(poly.capacity_ == this->capacity_); // 문제를 단순화하기 위한 가정
 
     Polynomial temp(maxDegree());
 
     for (int i = 0; i < capacity_; ++i) {
+        if (coeffs_[i] == 0.0f) continue;
         for (int j = 0; j < poly.capacity_; ++j) {
-            if (coeffs_[i] == 0.0f || poly.coeffs_[j] == 0.0f) {
-                continue;
-            }
-            if (i + j >= capacity_) {
+            if (poly.coeffs_[j] == 0.0f || i + j >= capacity_) {
                 continue;
             }
             temp.coeffs_[i + j] += coeffs_[i] * poly.coeffs_[j];
@@ -78,8 +70,7 @@ Polynomial Polynomial::mult(const Polynomial& poly)
     return temp;
 }
 
-float Polynomial::eval(float x)
-{
+float Polynomial::eval(float x) {
     float temp = 0.0f;
 
     for (int i = 0; i < capacity_; ++i) {
@@ -91,12 +82,10 @@ float Polynomial::eval(float x)
     return temp;
 }
 
-void Polynomial::print()
-{
+void Polynomial::print() {
     bool is_first = true; // 더하기 출력시 확인용
 
-    for (int i = 0; i < capacity_; i++)
-    {
+    for (int i = 0; i < capacity_; i++) {
         if (coeffs_[i] != 0.0f) // 주의: 0이 아닌 항들만 출력
         {
             if (!is_first)
