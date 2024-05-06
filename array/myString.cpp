@@ -99,6 +99,9 @@ myString myString::concat(myString appStr) {
 }
 
 myString myString::insert(myString t, int begin) {
+    assert(begin >= 0);
+    assert(begin <= size_);
+
     int insertSize = size_ + t.size_;
     char* insertStr = nullptr;
 
