@@ -89,13 +89,12 @@ myString myString::concat(myString appStr) {
     char* concatStr = nullptr;
 
     try {
-        concatStr = new char[concatSize + 1];
+        concatStr = new char[concatSize];
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
-    concatStr[concatSize + 1] = '\0';
-    strcpy(concatStr, str_);
-    strncpy(concatStr + size_, appStr.str_, appStr.size_);
+    memmove(concatStr, str_, size_);
+    memmove(concatStr + size_, appStr.str_, appStr.size_);
     return myString(concatStr);
 }
 
