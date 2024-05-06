@@ -73,9 +73,11 @@ void myString::resize(int newSize) {
 myString myString::substr(int begin, int num) {
     char* subStr = nullptr;
 
+    assert(begin +num -1 < size_);
+
     try {
         subStr = new char[num];
-        strncpy(subStr, str_ + begin, num);
+        memmove(subStr, str_ + begin, num);
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
