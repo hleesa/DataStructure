@@ -55,9 +55,9 @@ void myString::resize(int newSize) {
     char* newStr = nullptr;
 
     try {
-        newStr = new char[newSize + 1];
-        bzero(newStr, newSize + 1);
-        strcpy(newStr, str_);
+        newStr = new char[newSize];
+        bzero(newStr, newSize);
+        memmove(newStr, str_, newSize);
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
