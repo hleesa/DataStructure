@@ -118,14 +118,13 @@ myString myString::insert(myString t, int begin) {
 
 int myString::find(myString pat) {
     for (int i = 0; i + pat.size_ <= size_; ++i) {
-        bool same = true;
-        for (int j = 0; j < pat.size_; ++j) {
+        int j;
+        for (j = 0; j < pat.size_; ++j) {
             if (str_[i + j] != pat.str_[j]) {
-                same = false;
                 break;
             }
         }
-        if (same) {
+        if (j == pat.size_) {
             return i;
         }
     }
