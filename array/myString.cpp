@@ -8,11 +8,12 @@ myString::myString() : size_(0), str_(nullptr) {
 
 myString::myString(const char* cStr) : size_(strlen(cStr)) {
     try {
-        str_ = new char[size_ + 1];
+        str_ = new char[size_];
         strcpy(str_, cStr);
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
+    memmove(str_, cStr, size_);
 }
 
 myString::myString(const myString& string) : size_(string.size_ + 1) {
