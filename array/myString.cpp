@@ -106,13 +106,13 @@ myString myString::insert(myString t, int begin) {
     char* insertStr = nullptr;
 
     try {
-        insertStr = new char[insertSize + 1];
+        insertStr = new char[insertSize];
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
-    strncpy(insertStr, str_, begin);
-    strcpy(insertStr + begin, t.str_);
-    strcpy(insertStr + begin + t.size_, str_ + begin);
+    memmove(insertStr, str_, begin);
+    memmove(insertStr + begin, t.str_, t.size_);
+    memmove(insertStr + begin + t.size_, str_ + begin, size_ - begin);
     return myString(insertStr);
 }
 
