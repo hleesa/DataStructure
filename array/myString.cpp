@@ -71,9 +71,9 @@ void myString::resize(int newSize) {
 }
 
 myString myString::substr(int begin, int num) {
-    char* subStr = nullptr;
-
     assert(begin +num -1 < size_);
+
+    char* subStr = nullptr;
 
     try {
         subStr = new char[num];
