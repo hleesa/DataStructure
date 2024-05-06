@@ -16,13 +16,13 @@ myString::myString(const char* cStr) : size_(strlen(cStr)) {
     memmove(str_, cStr, size_);
 }
 
-myString::myString(const myString& string) : size_(string.size_ + 1) {
+myString::myString(const myString& string) : size_(string.size_) {
     try {
-        str_ = new char[size_ + 1];
+        str_ = new char[size_];
     } catch (std::bad_alloc& e) {
         std::cerr << "memory allocation failed: " << e.what() << '\n';
     }
-    strcpy(str_, string.str_);
+    memmove(str_, string.str_, size_);
 }
 
 myString::~myString() {
