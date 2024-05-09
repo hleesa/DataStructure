@@ -11,6 +11,13 @@ public:
     {
     }
 
+    SparsePolynomial(const SparsePolynomial& other) : capacity_(other.capacity_), num_terms_(other.num_terms_) {
+        terms_ = new Term[num_terms_];
+        for (int i = 0; i < num_terms_; ++i) {
+            terms_[i] = other.terms_[i];
+        }
+    }
+
     ~SparsePolynomial()
     {
         if (terms_) delete[] terms_;

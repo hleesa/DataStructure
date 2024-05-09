@@ -51,7 +51,9 @@ SparsePolynomial SparsePolynomial::Add(const SparsePolynomial& poly) {
             ++ti;
         }
         else if (terms_[ti].exp == poly.terms_[pi].exp) {
-            result.NewTerm(terms_[ti].coef + poly.terms_[pi].coef, terms_[ti].exp);
+            if(terms_[ti].coef + poly.terms_[pi].coef != 0.0f) {
+                result.NewTerm(terms_[ti].coef + poly.terms_[pi].coef, terms_[ti].exp);
+            }
             ++ti;
             ++pi;
         }
@@ -60,7 +62,6 @@ SparsePolynomial SparsePolynomial::Add(const SparsePolynomial& poly) {
             ++pi;
         }
     }
-
     while (ti < num_terms_) {
         result.NewTerm(terms_[ti].coef, terms_[ti].exp);
         ++ti;
