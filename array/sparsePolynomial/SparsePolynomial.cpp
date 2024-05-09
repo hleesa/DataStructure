@@ -21,10 +21,14 @@ void SparsePolynomial::NewTerm(float coef, int exp) {
         if (terms_) delete[] terms_;
         terms_ = new_term;
     }
-
     terms_[num_terms_].coef = coef;
     terms_[num_terms_].exp = exp;
-
+    int i = num_terms_;
+    while (i >= 1 && terms_[i - 1].exp > terms_[i].exp) {
+        swap(terms_[i - 1].exp, terms_[i].exp);
+        swap(terms_[i - 1].coef, terms_[i].coef);
+        --i;
+    }
     num_terms_++;
 }
 
