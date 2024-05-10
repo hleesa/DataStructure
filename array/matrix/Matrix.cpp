@@ -5,6 +5,9 @@
 using namespace std;
 
 Matrix::Matrix(int row, int col) : numRows(row), numCols(col), values(new float[row * col]) {
+    for (int i = 0; i < row * col; ++i) {
+        values[i] = 0.0f;
+    }
 }
 
 Matrix::Matrix(const Matrix& other) : numRows(other.numRows), numCols(other.numCols),
@@ -15,7 +18,9 @@ Matrix::Matrix(const Matrix& other) : numRows(other.numRows), numCols(other.numC
 }
 
 Matrix::~Matrix() {
-    delete[] values;
+    if (values) {
+        delete[] values;
+    }
 }
 
 void Matrix::setValue(int row, int col, float value) {
@@ -31,9 +36,10 @@ Matrix Matrix::transpose() {
 
     for (int r = 0; r < numRows; ++r) {
         for (int c = 0; c < numCols; ++c) {
-            transMat.values[c * numRows + r] = values[r * numCols + c];
+            transMat.setValue(r, c, getValue(r, c));
         }
     }
+
     return transMat;
 }
 
@@ -43,9 +49,12 @@ Matrix Matrix::add(const Matrix& other) {
 
     Matrix sumMat(numRows, numCols);
 
-    for (int i = 0; i < numRows * numCols; ++i) {
-        sumMat.values[i] = values[i] + other.values[i];
+    for (int r = 0; r < numRows; ++r) {
+        for (int c = 0; c < numCols; ++c) {
+            sumMat.setValue(r, c, getValue(r, c) + other.getValue(r, c));
+        }
     }
+
     return sumMat;
 }
 
