@@ -36,7 +36,7 @@ Matrix Matrix::transpose() {
 
     for (int r = 0; r < numRows; ++r) {
         for (int c = 0; c < numCols; ++c) {
-            transMat.setValue(r, c, getValue(r, c));
+            transMat.setValue(c, r, getValue(r, c));
         }
     }
 
