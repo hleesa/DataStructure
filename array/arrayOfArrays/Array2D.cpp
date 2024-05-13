@@ -9,6 +9,12 @@ Array2D::Array2D(int numRow, int numCol) : numRow(numRow), numCol(numCol) {
     for (int r = 0; r < numRow; ++r) {
         arrays[r] = new float[numCol];
     }
+
+    for (int r = 0; r < numRow; ++r) {
+        for (int c = 0; c < numCol; ++c) {
+            arrays[r][c] = 0.0f;
+        }
+    }
 }
 
 Array2D::Array2D(const Array2D& other) : numRow(other.numRow), numCol(other.numCol) {
