@@ -57,9 +57,15 @@ void SparseMatrix::setValue(int row, int col, float value) {
 }
 
 float SparseMatrix::getValue(int row, int col) const {
+    int key = row * num_cols_ + col;
+
     for (int i = 0; i < num_terms_; ++i) {
-        if (terms_[i].row == row && terms_[i].col == col) {
+        int candi = terms_[i].row * num_cols_ + terms_[i].col;
+        if (candi == key) {
             return terms_[i].value;
+        }
+        else if (candi > key) {
+            break;
         }
     }
     return 0.0f;
