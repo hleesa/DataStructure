@@ -11,17 +11,9 @@ public:
     {
     }
 
-    SparsePolynomial(const SparsePolynomial& other) : capacity_(other.capacity_), num_terms_(other.num_terms_) {
-        terms_ = new Term[num_terms_];
-        for (int i = 0; i < num_terms_; ++i) {
-            terms_[i] = other.terms_[i];
-        }
-    }
+    SparsePolynomial(const SparsePolynomial& other);
 
-    ~SparsePolynomial()
-    {
-        if (terms_) delete[] terms_;
-    }
+    ~SparsePolynomial();
 
     // 새로운 항을 추가할 때 자기 위치를 찾아서 넣어줘야 함
     void NewTerm(float coef, int exp);

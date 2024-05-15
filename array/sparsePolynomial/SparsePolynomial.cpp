@@ -6,6 +6,18 @@
 
 using namespace std;
 
+SparsePolynomial::SparsePolynomial(const SparsePolynomial& other) : capacity_(other.capacity_),
+                                                                    num_terms_(other.num_terms_),
+                                                                    terms_(new Term[other.num_terms_]) {
+    memmove(terms_, other.terms_, sizeof(Term) * num_terms_);
+}
+
+SparsePolynomial::~SparsePolynomial() {
+    if (terms_) {
+        delete[] terms_;
+    }
+}
+
 void SparsePolynomial::NewTerm(float coef, int exp) {
     if (coef == 0.0f) return;
 
