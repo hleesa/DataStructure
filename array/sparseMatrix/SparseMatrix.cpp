@@ -16,9 +16,7 @@ SparseMatrix::SparseMatrix(int num_rows, int num_cols, int capacity) : num_rows_
 SparseMatrix::SparseMatrix(const SparseMatrix& other) : num_rows_(other.num_rows_), num_cols_(other.num_cols_),
                                                         capacity_(other.capacity_), num_terms_(other.num_terms_),
                                                         terms_(new MatrixTerm[other.capacity_]) {
-    for (int i = 0; i < capacity_; ++i) {
-        terms_[i] = other.terms_[i];
-    }
+    memmove(terms_, other.terms_, capacity_);
 }
 
 SparseMatrix::~SparseMatrix() {
