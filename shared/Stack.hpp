@@ -51,7 +51,7 @@ public:
     }
 
     void push(const T& item){
-        if (size() + 1 == capacity_) {
+        if (size() == capacity_) {
             resize(capacity_ * 2);
         }
         ++top_;
