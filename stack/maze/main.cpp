@@ -48,8 +48,7 @@ void RecurMaze(Pos p) {
     if (mark == 'G') {
         cout << "Found!" << endl;
         return;
-    }
-    else if (mark != '1' && mark != 'X') {
+    } else if (mark != '1' && mark != 'X') {
         mark = 'X';
         for (int d = 0; d < 4; ++d) {
             RecurMaze({p.row + dr[d], p.col + dc[d]});
@@ -82,7 +81,6 @@ void StackMaze() {
     Pos start = {1, 1};
     s.push(start);
 
-
     while (!s.isEmpty()) {
         Pos p = s.top();
         s.pop();
@@ -114,4 +112,3 @@ int main() {
 
     return 0;
 }
-
