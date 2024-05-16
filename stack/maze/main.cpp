@@ -43,41 +43,37 @@ struct Pos {
 };
 
 void RecurMaze(Pos p) {
-    if (maze[p.row][p.col] == 'G') {
+    char &mark = maze[p.row][p.col];
+
+    if (mark == 'G') {
         cout << "Found!" << endl;
         return;
     }
-
-    for (int d = 0; d < 4; ++d) {
-        Pos next = {p.row + dr[d], p.col + dc[d]};
-        char &mark = maze[next.row][next.col];
-        if (mark == '0' || mark == 'G') {
-            if (mark == '0') {
-                mark = 'X';
-            }
-            RecurMaze(next);
+    else if (mark != '1' && mark != 'X') {
+        mark = 'X';
+        for (int d = 0; d < 4; ++d) {
+            RecurMaze({p.row + dr[d], p.col + dc[d]});
         }
     }
+
 }
 
 //조기 종료가 가능한 버전
 int RecurMazeFast(Pos p) {
-    if (maze[p.row][p.col] == 'G') {
+    char &mark = maze[p.row][p.col];
+
+    if (mark == 'G') {
         cout << "Found!" << endl;
         return 1;
-    }
-
-    for (int d = 0; d < 4; ++d) {
-        Pos next = {p.row + dr[d], p.col + dc[d]};
-        char &mark = maze[next.row][next.col];
-        if (mark == '0' || mark == 'G') {
-            if (mark == '0') {
-                mark = 'X';
-            }
-            if (RecurMazeFast(next) == 1)
+    } else if (mark != '1' && mark != 'X') {
+        mark = 'X';
+        for (int d = 0; d < 4; ++d) {
+            if (RecurMazeFast({p.row + dr[d], p.col + dc[d]})) {
                 return 1;
+            }
         }
     }
+    return 0;
 }
 
 void StackMaze() {
