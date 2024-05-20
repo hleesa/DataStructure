@@ -35,7 +35,7 @@ public:
     T& rear() const{
         assert(!isEmpty());
 
-        return queue_[(rear_ + 1) % capacity_];
+        return queue_[rear_];
     }
 
     int size() const{
