@@ -5,11 +5,12 @@
 using namespace std;
 
 int prec(char c);
+
 void infixToPostfix(Queue<char> &q, Queue<char> &output);
+
 int evalPostfix(Queue<char> &queue);
 
-int main()
-{
+int main() {
     // 예제에서는 빈칸 없이 한 자리 숫자만 가능
 
 //    const char infix[] = "8/2+(3+4)*5-1*2";
@@ -41,8 +42,7 @@ int main()
 
 
 // Function to return precedence of operators
-int prec(char c)
-{
+int prec(char c) {
     if (c == '/' || c == '*')
         return 2;
     else if (c == '+' || c == '-')
@@ -51,38 +51,32 @@ int prec(char c)
         return -1; // '('는 우선순위가 아주 낮은 것으로 처리, ')' 닫는 괄호를 만날때까지 남겨두기 위함
 }
 
-void infixToPostfix(Queue<char>& q, Queue<char>& output)
-{
+void infixToPostfix(Queue<char> &q, Queue<char> &output) {
     Stack<char> s; // 우선순위가 낮은 연산을 보류하기 위한 스택
 
     output.setDebugFlag(false);
 
-    while (!q.isEmpty())
-    {
+    while (!q.isEmpty()) {
         char c = q.front();
         q.dequeue();
 
         cout << c << endl;
 
-        if ('0' <= c && c <= '9')
-        {
+        if ('0' <= c && c <= '9') {
             output.enqueue(c);
         }
-        else if (c == '(')
-        {
+        else if (c == '(') {
             s.push(c);
         }
-        else if (c == ')')
-        {
-            while(!s.isEmpty() && s.top() != '('){
+        else if (c == ')') {
+            while (!s.isEmpty() && s.top() != '(') {
                 output.enqueue(s.top());
                 s.pop();
             }
             s.pop();
         }
-        else
-        {
-            while (!s.isEmpty() && prec(s.top()) >= prec(c)){
+        else {
+            while (!s.isEmpty() && prec(s.top()) >= prec(c)) {
                 output.enqueue(s.top());
                 s.pop();
             }
@@ -96,33 +90,28 @@ void infixToPostfix(Queue<char>& q, Queue<char>& output)
         cout << endl;
     }
 
-    while (!s.isEmpty())
-    {
+    while (!s.isEmpty()) {
         output.enqueue(s.top());
         s.pop();
     }
 }
 
-int evalPostfix(Queue<char>& q)
-{
+int evalPostfix(Queue<char> &q) {
     Stack<int> s;
 
-    while (!q.isEmpty())
-    {
+    while (!q.isEmpty()) {
         char c = q.front();
         q.dequeue();
 
         cout << c << endl;
 
-        if (c != '+' && c != '-' && c != '*' && c != '/')
-        {
+        if (c != '+' && c != '-' && c != '*' && c != '/') {
             s.push(c - '0');
         }
-        else
-        {
+        else {
             cout << "Operator: " << c << endl;
 
-            if(s.size() < 2) {
+            if (s.size() < 2) {
                 cout << "Wrong formula" << endl;
                 exit(-1); // 강제 종료
             }
@@ -142,12 +131,10 @@ int evalPostfix(Queue<char>& q)
             else if (c == '*') {
                 result = lhs * rhs;
             }
-            else if (c == '/')
-            {
+            else if (c == '/') {
                 result = lhs / rhs;
             }
-            else
-            {
+            else {
                 cout << "Wrong operator" << endl;
                 exit(-1); // 강제 종료
             }
