@@ -23,7 +23,7 @@ void RecurPrint(Node *node) {
 
 void IterPrint(Node *node) {
     while (node) {
-        cout << node->item << "\n";
+        cout << *node << "\n";
         node = node->next;
     }
 }
