@@ -16,7 +16,7 @@ void RecurPrint(Node *node) {
     if (node == nullptr) {
         return;
     }
-    cout << node->item << "\n";
+    cout << *node << "\n";
     RecurPrint((node->next));
 
 }
