@@ -146,13 +146,16 @@ public:
         Stack<Node*> stk;
         Node* cur = first;
         while (cur) {
-            stk.push(cur);
+            stk.push(new Node());
+            stk.top()->item = cur->item;
             cur = cur->next;
         }
         cur = first;
         while (!stk.isEmpty()) {
             cur->item = stk.top()->item;
+            delete stk.top();
             stk.pop();
+            cur = cur->next;
         }
         return;
     }
