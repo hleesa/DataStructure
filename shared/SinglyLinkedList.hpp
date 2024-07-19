@@ -76,6 +76,7 @@ public:
             if (nodeToFind->item == item) {
                 return nodeToFind;
             }
+            nodeToFind = nodeToFind->next;
         }
         return nullptr;
     }
