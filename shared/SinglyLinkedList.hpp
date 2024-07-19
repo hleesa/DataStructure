@@ -140,7 +140,7 @@ public:
         }
         Node* toDeleteNode = size == 1 ? newBack : newBack->next;
         delete toDeleteNode;
-        newBack = nullptr;
+        newBack->next = nullptr;
     }
 
     void reverse() {
