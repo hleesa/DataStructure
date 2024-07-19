@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../shared/singlyLinkedList.hpp"
+#include "../shared/SinglyLinkedList.hpp"
 
 using namespace std;
 
