@@ -17,13 +17,15 @@ public:
     }
 
     SinglyLinkedList(const SinglyLinkedList &other) {
-        Node* thisCur = new Node();
+        first = new Node();
+        Node* thisCur = first;
         Node* otherCur = other.first;
         while (otherCur) {
             thisCur->item = otherCur->item;
             otherCur = otherCur->next;
             if (otherCur) {
                 thisCur->next = new Node();
+                thisCur = thisCur->next;
             }
         }
     }
