@@ -144,20 +144,13 @@ public:
     }
 
     void reverse() {
-        Stack<Node*> stk;
-        Node* cur = first;
-        while (cur) {
-            stk.push(new Node());
-            stk.top()->item = cur->item;
-            cur = cur->next;
+        if (first == nullptr) {
+            return;
         }
-        cur = first;
-        while (!stk.isEmpty()) {
-            cur->item = stk.top()->item;
-            delete stk.top();
-            stk.pop();
-            cur = cur->next;
-        }
+        Node* front = first;
+        first = first->next;
+        reverse();
+        pushBack(front->item);
         return;
     }
 
